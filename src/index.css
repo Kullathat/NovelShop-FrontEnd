@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import "@font/nunito";
+@import "@font/nuninto/regular"; */
+
+
+body {
+    background-color: #E3E3E3;  
+}
+
+
