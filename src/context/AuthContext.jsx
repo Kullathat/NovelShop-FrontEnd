@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from '../config/axios'
-import { addAccessToken, getAccessToken } from "../utils/token-storage";
+import { addAccessToken, getAccessToken , removeAccressToken  } from "../utils/token-storage";
 
 
 // return ค่าให้ดึงออกไปใช้ได้
@@ -35,8 +35,12 @@ export default function AuthcontextProvider({ children }) {
         addAccessToken(res.data.accessToken)
         setAuthUser(res.data.user)
     }
+    const logout = () => {
+        removeAccressToken();
+        setAuthUser(null);
+      };
 
     // app เป็น children ดึงไปใช้่ได้
-    return <Authcontext.Provider value={{ login, authUser, register }}> {children}</Authcontext.Provider>
+    return <Authcontext.Provider value={{ login, authUser, register,logout }}> {children}</Authcontext.Provider>
 }
 

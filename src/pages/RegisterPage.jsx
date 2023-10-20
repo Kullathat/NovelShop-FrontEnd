@@ -31,7 +31,7 @@ const ValidateRegister = input => { //undefined|| {firstName}...,{lastName}
 };
 
 export default function Register() {
-    const [input, setInput] = useState({
+    const [input,  setInput] = useState({
         userName: '',
         password: '',
         firstName: '',

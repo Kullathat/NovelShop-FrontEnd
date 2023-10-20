@@ -3,6 +3,6 @@ export default function loginPage(){
     return(
         <div>
             <LoginForm/>
-        </div>
+       </div>
     )
 }

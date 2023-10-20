@@ -6,7 +6,7 @@ import { getAccessToken } from '../utils/token-storage';
 axios.defaults.baseURL = BACKEND_URL
 
 axios.interceptors.request.use((config) => {
-    const token = getAccessToken;
+    const token = getAccessToken();
     if(token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
