@@ -6,21 +6,23 @@ import { useCart } from "../../hooks/use-cart";
 
 export default function CartForm() {
     const [data, setData] = useState([])
-    const {granTotal,setGranTotal}=useCart()
-    const {totalQuantity,setTotalQuantity} = useCart()
+    const { granTotal, setGranTotal } = useCart()
+    const { totalQuantity, setTotalQuantity } = useCart()
 
     const getCartItem = () => axios.get('/item/cartItem')
         .then(res => {
             setData(res.data.cartItem)
-            const totalQuantity = res.data.cartItem.reduce((amount,item) => {
+            const totalQuantity = res.data.cartItem.reduce((amount, item) => {
+                // console.log(item)
                 amount += item.quantity
                 return amount
-            },0)
+
+            }, 0)
             setTotalQuantity(totalQuantity)
-            const total = res.data.cartItem.reduce((acc,item)=>{
-                acc+=item.book.price * item.quantity
+            const total = res.data.cartItem.reduce((acc, item) => {
+                acc += item.book.price * item.quantity
                 return acc
-            },0)
+            }, 0)
             setGranTotal(total)
 
         })
@@ -28,11 +30,8 @@ export default function CartForm() {
             console.log(err)
         })
 
-
     useEffect(() => {
         getCartItem()
-
-   
     }, [])
     const deleteInCart = async cartId => {
         try {

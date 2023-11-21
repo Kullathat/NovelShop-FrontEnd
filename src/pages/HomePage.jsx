@@ -5,6 +5,7 @@ import pic3 from '../assets/EnderGame.jpg'
 import pic4 from '../assets/TheLordOfTheRing.jpg'
 import pic5 from '../assets/harrypotter.jpeg'
 import pic6 from '../assets/PerciJackSon.jpg'
+
 export default function HomePage() {
 
     return (

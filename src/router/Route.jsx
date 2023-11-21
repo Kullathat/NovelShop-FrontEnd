@@ -10,6 +10,13 @@ import PaymentPage from "../pages/PaymentPage";
 import ListPage from "../pages/ListPage";
 import AddressPage from "../pages/AddressPage"
 import Authenticated from "../features/auth/Authenticated";
+import AdminCreateForm from "../admin/adminCreate";
+import ApproveAdmin from "../admin/adminApprove";
+import AdminContextProvider from "../context/AdminContext";
+import AdminPage from "../admin/adminEdit";
+import EditPage from "../admin/EditPage";
+
+
 
 const router = createBrowserRouter([
     {
@@ -19,10 +26,12 @@ const router = createBrowserRouter([
         ),
         children: [
             { path: '', element: <HomePage /> },
-            { path: 'Register', element:
-            <RedirectIfAuthenticated>
-            <Register />
-            </RedirectIfAuthenticated>  },
+            {
+                path: 'Register', element:
+                    <RedirectIfAuthenticated>
+                        <Register />
+                    </RedirectIfAuthenticated>
+            },
             {
                 path: 'Cart', element:
                     <Authenticated>
@@ -48,12 +57,35 @@ const router = createBrowserRouter([
                     <RedirectIfAuthenticated>
                         <LoginPage />
                     </RedirectIfAuthenticated>
-                ,
 
             }
-
         ]
     },
+    {
+        path: 'admin', element: (
+            <AdminContextProvider>
+                <Layout />,
+            </AdminContextProvider>
+        ),
+        children: [
+            {
+                path: 'create', element:
+                    <AdminCreateForm />
+            },
+            {
+                path: 'confirm', element:
+                    <ApproveAdmin />
+            },
+            {
+                path: 'main', element:
+                    <AdminPage/>
+            },
+            {
+                path: 'edit', element:
+                    <EditPage/>
+            }
+        ]
+    }
 
 ])
 export default function Router() {

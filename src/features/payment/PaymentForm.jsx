@@ -1,29 +1,31 @@
 import qrPic from '../../assets/qrcode.svg'
-import { useEffect, useRef, useState } from 'react'
-import axios from "../../config/axios"
+import { useRef, useState } from 'react'
+import axios from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
-export default function PaymentForm({ children }) {
+
+
+export default function PaymentForm() {
     const [file, setFile] = useState(null);
     const inputEl = useRef(null)
-    const [order,setOrder] = useState([])
-    useEffect(() => {
+    const navigate = useNavigate();
 
-}, [])
-
-    const getInOrder = async order => {
-            await axios.post('/payment/getOrderAddIn',order)
-    .then(res => {
-        setOrder(res.data.orderproduct)
-    })
+    const updateSlip = async data => {
+        return  await axios.patch('/payment/uploadSlip',data)   
     }
-    const handleOrderInput = (id) => {
-        getInOrder ({
-            userId: id,
-            bookId: id,
-            quantity: 1,
-            totalPrice: 10000
-        })  
+    const uploadSlip = async () => {
+        try {
+            const formData = new FormData();
+            console.log(file)
+            formData.append('slip', file);
+            await updateSlip(formData);
+           navigate('/')
+           {alert('Success')}
+        } catch (err) {
+            console.log(err)
+        } 
     }
+    
 
     return (
         <div className=' grid gap-y-5 text-center p-40  text-4xl' >
@@ -33,24 +35,23 @@ export default function PaymentForm({ children }) {
             </div>
             <div className=' justify-center'>
                 <input type="file"
-                    className=' hidden'
                     ref={inputEl}
+                    className='hidden'
                     onChange={e => {
                         if (e.target.files[0]) {
-                            setFile(e.target.files[0])
+                          setFile(e.target.files[0]);
                         }
-                        // เลือกรูปเเล้วเก็บ state 
-                    }}
+                      }}
                 />
             </div>
+
             <div>
-                <button onClick={() => { inputEl.current.click() }}>Choose Picture</button>
+                <button  onClick={() => inputEl.current.click()} >Choose Picture</button>
+                <div></div>
+
+                <button onClick={uploadSlip} className=" bg-black text-white rounded-md w-36 h-10  hover:bg-red-700 m-6 text-lg" >confirm </button> 
             </div>
-            <div> {children}</div>
-            <div>
-                <button onClick={() => {handleOrderInput() }}>Confirm Payment</button>
-            </div>
-          
+
         </div>
     )
 }

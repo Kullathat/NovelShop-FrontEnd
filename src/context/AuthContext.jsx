@@ -18,7 +18,7 @@ export default function AuthcontextProvider({ children }) {
         }
     }, []);
 
-
+    const [initLoading, setInitLoading] = useState(false);
     // useEffect(() => { }, [])
     const login = async signIn => {
         try {
@@ -41,6 +41,13 @@ export default function AuthcontextProvider({ children }) {
       };
 
     // app เป็น children ดึงไปใช้่ได้
-    return <Authcontext.Provider value={{ login, authUser, register,logout }}> {children}</Authcontext.Provider>
+    return <Authcontext.Provider 
+    value={{ login, 
+        authUser,
+         register
+         ,logout,
+         initLoading, 
+         setInitLoading
+        }}> {children}</Authcontext.Provider>
 }
 

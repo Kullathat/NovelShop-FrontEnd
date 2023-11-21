@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "../../config/axios"
-export default function OrderButton() {
+export default function OrderProduct() {
     const [cart, setCart] = useState([])
     useEffect(() => {
         axios.get('/payment/getOrder')

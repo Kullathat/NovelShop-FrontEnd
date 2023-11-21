@@ -31,6 +31,7 @@ export default function LoginForm() {
                         placeholder='username' 
                         value={input.userName}
                         onChange={e => setInput({...input, userName: e.target.value})}/>
+                        
                 </div>
             </div>
             <div>
@@ -44,7 +45,7 @@ export default function LoginForm() {
             </div>
             <div>
                 <div className=" mx-auto col-span-full text-center p-5">
-                    <button className=" bg-black text-white text-lg py-1 px-10 rounded-2xl">Submit</button>
+                    <button className=" bg-black text-white text-lg py-1 px-10 rounded-2xl ">Submit</button>
                 </div>
             </div>
         </form>

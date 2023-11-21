@@ -5,8 +5,6 @@ import { useAuth } from '../hooks/use-auth'
 import InputErrorMessage from '../features/auth/InputErrorMessage'
 
 
-
-
 const registerSchema = Joi.object({
     userName: Joi.string().trim().required(),
     password: Joi.string()
@@ -42,11 +40,13 @@ export default function Register() {
     const [error, setError] = useState({
     });
 
-    const { register } = useAuth();
+    const { register,setInitLoading } = useAuth();
+    
 
     const handleChangeInput = e => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
+    console.log(input)
 
     const handleSubmitForm = e => {
         e.preventDefault();
@@ -57,12 +57,13 @@ export default function Register() {
         }
         setError({});
         register(input)
+        setInitLoading(false)
     }
 
     return (
         <form className="grid gap-y-5 justify-center p-40  text-4xl " onSubmit={handleSubmitForm} >
             <div >
-                <nav className=" justify-center flex p-10"> SIGN UP</nav>
+                <nav className=" justify-center flex p-10 font-bold"> SIGN UP</nav>
             </div>
             <div>
                 <div>
@@ -72,6 +73,7 @@ export default function Register() {
                         value={input.userName}
                         onChange={handleChangeInput}
                         name='userName'
+     
                     />
                     {error.userName && <InputErrorMessage message={error.userName} />}
 
@@ -135,6 +137,7 @@ export default function Register() {
                 </div>
             </div>
         </form>
+        
 
     )
 }

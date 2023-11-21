@@ -4,16 +4,17 @@ import { useCart } from "../hooks/use-cart";
 export default function Cart() {
     const { granTotal } = useCart()
     const { totalQuantity } = useCart()
+ 
     return (
         <div  >
             <CartForm className=' font-serif text-xl   ' />
             <div className=" flex justify-between m-20 text-xl font-serif">
 
                 <div>
-                    Total Quantity:  {totalQuantity && totalQuantity}
+                    Total Quantity:  {totalQuantity }
                 </div>
                 <div>
-                    Total price:  {granTotal && granTotal}
+                    Total price:  {granTotal}
                 </div>
             </div>
             <div className=" flex justify-center m-10 " >

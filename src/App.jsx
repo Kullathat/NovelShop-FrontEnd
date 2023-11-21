@@ -1,12 +1,11 @@
-// import { useAuth } from "./hooks/use-auth"
+import { useAuth } from "./hooks/use-auth";
+import Loading from "./layout/Loading";
 import Router from "./router/Route"
 
 
 function App() {
-    // const { FirstLoading } = useAuth();
-    // if  (FirstLoading) {
-    //     return <h1>Loading....</h1>
-    // }
+    const { initLoading } = useAuth;
+  if (initLoading) return <Loading/>;
     return (<>
         <Router />
     </>)
